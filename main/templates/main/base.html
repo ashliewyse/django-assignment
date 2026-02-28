@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My Site{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/style.css' %}">
+</head>
+<body>
+
+<div class="container">
+
+    <nav>
+        <a href="{% url 'home' %}">Home</a> |
+        <a href="{% url 'about' %}">About</a> |
+        <a href="{% url 'contact' %}">Contact</a> |
+        <a href="{% url 'comments' %}">Comments</a> |
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}">Profile</a> |    
+            <a href="{% url 'dashboard' %}">Dashboard</a> |
+            
+            <!-- POST logout (prevents 405 error) -->
+            <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit"
+                        style="background:none;border:none;color:blue;text-decoration:underline;cursor:pointer;padding:0;">
+                    Logout
+                </button>
+            </form>
+
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </nav>
+
+    <hr>
+
+    {% block content %}
+    {% endblock %}
+
+</div>
+
+</body>
+</html>

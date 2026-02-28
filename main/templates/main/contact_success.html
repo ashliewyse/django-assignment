@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+
+{% block title %}Sent{% endblock %}
+
+{% block content %}
+<h1>Message Sent ✅</h1>
+<p>Thanks, {{ data.name }}! We got your message.</p>
+
+<h3>Preview</h3>
+<ul>
+  <li><strong>Email:</strong> {{ data.email }}</li>
+  <li><strong>Message:</strong> {{ data.message }}</li>
+</ul>
+
+<p><a href="{% url 'contact' %}">Send another message</a></p>
+{% endblock %}
